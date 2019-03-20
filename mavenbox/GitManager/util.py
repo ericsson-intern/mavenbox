@@ -42,7 +42,7 @@ class GitAdaptor:
         f.close()
         
         
-        subprocess.call('git pull --depth=1 origin hello ',shell=True)
+        subprocess.call('git pull --depth=1 origin master ',shell=True)
 
 
 
