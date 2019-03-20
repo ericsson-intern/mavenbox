@@ -36,6 +36,7 @@ class GitAdaptor:
         # subprocess.call(['cd',self.REPO_DIR])
         # subprocess.call('cd',shell=True)
         # self.resetcwd()
+        subprocess.call('cd',shell=True,cwd=self.REPO_DIR)
         subprocess.call("git remote add origin " + self.REMOTE_URL,shell=True,cwd=self.REPO_DIR)
         subprocess.call('git config core.sparsecheckout true',shell=True,cwd=self.REPO_DIR)
 
