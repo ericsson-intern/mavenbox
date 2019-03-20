@@ -5,16 +5,20 @@ import shutil
 
 class GitAdaptor:
     
-    def __init__(self):
-        self.REMOTE_URL='https://github.com/ericsson-intern/maven-simple'
-        self.REPO_DIR = os.path.join(os.path.dirname(__name__),'temp_repo')
+    # def __init__(self):
+    #     self.REMOTE_URL='https://github.com/ericsson-intern/testcases'
+    #     self.REPO_DIR = os.path.join(os.path.dirname(__name__),'temp_repo')
 
-    def init(self,repo_folder=None,url=None):
+    def __init__(self,repo_folder=None,url=None):
         if not repo_folder:
             self.REPO_DIR = repo_folder
-        if not url:
-            self.REMOTE_URL= url
+        else:
+            self.REPO_DIR = os.path.join(os.path.dirname(__name__),'__repo')
 
+        if not url:
+            self.REMOTE_URL = url
+        else:
+            self.REMOTE_URL = 'https://github.com/ericsson-intern/testcases'
 
 
         if os.path.isdir(self.REPO_DIR):

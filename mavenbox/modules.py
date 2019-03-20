@@ -55,7 +55,7 @@ def update_dependency(COLLECTION_ROOT=None,TSV_FILE=None,URLS=None):
     if not TSV_FILE:
         TSV_FILE = os.path.abspath(os.path.join(os.path.dirname(__name__),'artifacts.tsv'))
     if not URLS:
-        URLS = ['https://github.com/ericsson-intern/maven-simple']
+        URLS = ['https://github.com/ericsson-intern/testcases']
 
 
     artifacts = tsv_util(TSV_FILE)
@@ -67,9 +67,9 @@ def update_dependency(COLLECTION_ROOT=None,TSV_FILE=None,URLS=None):
         repo_dir_abspath = os.path.join(COLLECTION_ROOT,repo_dir_name)
         os.makedirs(repo_dir_abspath)
 
-        adaptor = GitAdaptor()
+       
         print(repo_dir_abspath)
-        adaptor.init(repo_dir_abspath, url )
+        adaptor = GitAdaptor(repo_dir_abspath, url)
         
         for artifact in artifacts:
             update_dependency_aux(repo_dir_abspath,(artifact['name'],artifact['version']))
