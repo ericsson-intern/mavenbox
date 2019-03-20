@@ -1,2 +1,2 @@
-![alt text](https://raw.githubusercontent.com/ericsson-intern/mavenbox/blob/master/test/ss1.png)
-![alt text](https://raw.githubusercontent.com/ericsson-intern/mavenbox/blob/master/test/ss2.png)
+![alt text](/test/ss1.png?raw=true "Title")
+![alt text](/test/ss2.png?raw=true "Title")
