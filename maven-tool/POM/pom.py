@@ -25,12 +25,17 @@ class PomEditor:
         ET.register_namespace('',self.pom_ns.get('pom')) 
         self._debug()
 
+
     def _debug(self):
         print('\n\n\n\n/////////////////// PomEditor Instance //////////////////////\n')    
         
     def __del__(self):
         # print('PomEditor class instance destroyed')
         pass
+
+
+
+
 
     #read a file and return a ElementTree  
     def get_tree_from_xmlfile(self,filename):  
@@ -68,9 +73,13 @@ class PomEditor:
         print('======================= updating dependency========================')
         self.pom_et= self.get_tree_from_xmlfile(self.pomlocation)
         print('file parsed as in-memory POM tree')
+
+        
         for dependency_element in self.pom_et.findall('pom:dependencies/pom:dependency',self.pom_ns):  
             checkartifactid = self.get_xpath_element_from_tree(dependency_element,'pom:artifactId',self.pom_ns).text  
             print('recursing through all dependencies')
+
+                        
             if (checkartifactid == param_artifactid ):  
                 self.artifactfound=True  
                 print('Artifact found in ' + self.pomlocation)  
@@ -111,21 +120,10 @@ class PomEditor:
 
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-def git_ignore(dirs):
-    if('.git' in dirs):
-        dirs.remove('.git')
 
 
-import os
 
 
-DIR_NAME = os.path.abspath(os.path.join(os.path.dirname(__name__),'temp'))
-os.chdir(DIR_NAME)
 
-for root, dirs, files in os.walk(DIR_NAME,topdown=True):
-    git_ignore(dirs)
-    for file in files:
-        if file.endswith('pom.xml'):
-            a=PomEditor(os.path.abspath(os.path.join(root, file)))
-            a.update_dependency('junit','4.13')
-            a.commit_local()
+
+
