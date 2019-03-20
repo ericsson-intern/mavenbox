@@ -66,10 +66,10 @@ class PomEditor:
         prettyXML=re.sub(trails,"\n",prettyXML)  
         return prettyXML  
     
-
+    
     #update the version of a dependency in the pom ElementTree if it is already present.
     #returns the updated ElementTree and a boolean indicating if the pom ElementTree has been updated  
-    def update_dependency(self,param_artifactid,param_version):  
+    def update_dependency_tree(self,param_artifactid,param_version):  
         print('======================= updating dependency========================')
         self.pom_et= self.get_tree_from_xmlfile(self.pomlocation)
         print('file parsed as in-memory POM tree')
