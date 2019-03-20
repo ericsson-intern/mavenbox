@@ -15,6 +15,9 @@ class GitAdaptor:
         else:
             self.REPO_DIR = os.path.join(os.path.dirname(__name__),'__repo')
 
+        print(repo_folder)
+        print('asdfasdfasdfasdfasdfasdfasdf====')
+
         if not url:
             self.REMOTE_URL = url
         else:
