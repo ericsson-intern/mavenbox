@@ -40,7 +40,7 @@ def url_dir_extract_name(url):
     link = 'https://github.com/msirrele/dc-metro-proxy'
     link = url
     l_strings = link.split('/')
-    return l_strings[-1]+'.git'
+    return l_strings[-1]+'_git'
 
 
 

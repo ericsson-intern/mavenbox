@@ -29,12 +29,12 @@ class GitAdaptor:
 
         include_string='pom.xml'
         
-        subprocess.call(['git' ,'init',self.REPO_DIR])
+        subprocess.call(['git' ,'init'],cwd=self.REPO_DIR)
         # subprocess.call(['cd',self.REPO_DIR])
         # subprocess.call('cd',shell=True)
-        self.resetcwd()
-        subprocess.call("git remote add origin " + self.REMOTE_URL,shell=True)
-        subprocess.call('git config core.sparsecheckout true',shell=True)
+        # self.resetcwd()
+        subprocess.call("git remote add origin " + self.REMOTE_URL,shell=True,cwd=self.REPO_DIR)
+        subprocess.call('git config core.sparsecheckout true',shell=True,cwd=self.REPO_DIR)
 
 
         f=open('./.git/info/sparse-checkout', 'w+')
@@ -42,7 +42,7 @@ class GitAdaptor:
         f.close()
         
         
-        subprocess.call('git pull --depth=1 origin master ',shell=True)
+        subprocess.call('git pull --depth=1 origin master ',shell=True,cwd=self.REPO_DIR)
 
 
 
