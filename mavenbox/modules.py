@@ -2,7 +2,18 @@ from POM.pom import PomEditor
 from GitManager.util import GitAdaptor
 import csv
 import os
+import shutil
+import atexit
 
+
+GLOBAL_COLLECTION_ROOT=''
+
+def cleanup_exit(COLLECTION_ROOT):
+    try:
+        shutil.rmtree(COLLECTION_ROOT)
+    except IOError:
+        print('permission denied while cleanup processing')
+        print('please delete \'.temp_repos\' directory manually with superuser access')
 
 def git_ignore(dirs):
     if('.git' in dirs):
@@ -40,24 +51,30 @@ def url_dir_extract_name(url):
     link = 'https://github.com/msirrele/dc-metro-proxy'
     link = url
     l_strings = link.split('/')
-    return l_strings[-1]+'_git'
+    return l_strings[-1]+'.git'
 
 
 
+    
 
 
 # //////////////////////// DRIVER CODE /////////////////////////////
 
 def update_dependency(COLLECTION_ROOT=None,TSV_FILE=None,URLS=None):
 
+    
+
     if not COLLECTION_ROOT:
-        COLLECTION_ROOT= os.path.abspath(os.path.join(os.path.dirname(__name__),'temp'))
+        COLLECTION_ROOT= os.path.abspath(os.path.join(os.path.dirname(__name__),'../.temp_repos'))
     if not TSV_FILE:
         TSV_FILE = os.path.abspath(os.path.join(os.path.dirname(__name__),'artifacts.tsv'))
     if not URLS:
         URLS = ['https://github.com/ericsson-intern/testcases']
 
 
+    GLOBAL_COLLECTION_ROOT=COLLECTION_ROOT
+    os.mkdir(COLLECTION_ROOT)
+    atexit.register(cleanup_exit,COLLECTION_ROOT)
     artifacts = tsv_util(TSV_FILE)
 
     for url in URLS:

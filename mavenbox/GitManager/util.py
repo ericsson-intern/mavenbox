@@ -5,24 +5,17 @@ import shutil
 
 class GitAdaptor:
     
-    # def __init__(self):
-    #     self.REMOTE_URL='https://github.com/ericsson-intern/testcases'
-    #     self.REPO_DIR = os.path.join(os.path.dirname(__name__),'temp_repo')
-
     def __init__(self,repo_folder=None,url=None):
-        if not repo_folder:
-            self.REPO_DIR = repo_folder
-        else:
-            self.REPO_DIR = os.path.join(os.path.dirname(__name__),'__repo')
+    
 
-        print(repo_folder)
+        self.BRANCH = 'master'
+        
+        self.REPO_DIR = repo_folder
+        self.REMOTE_URL = url
+    
+
+
         print('asdfasdfasdfasdfasdfasdfasdf====')
-
-        if not url:
-            self.REMOTE_URL = url
-        else:
-            self.REMOTE_URL = 'https://github.com/ericsson-intern/testcases'
-
 
         if os.path.isdir(self.REPO_DIR):
             shutil.rmtree(self.REPO_DIR)
@@ -41,12 +34,12 @@ class GitAdaptor:
         subprocess.call('git config core.sparsecheckout true',shell=True,cwd=self.REPO_DIR)
 
 
-        f=open('./.git/info/sparse-checkout', 'w+')
+        f=open(os.path.join(self.REPO_DIR,'.git/info/sparse-checkout'), 'w+')
         f.write(include_string)
         f.close()
         
         
-        subprocess.call('git pull --depth=1 origin master ',shell=True,cwd=self.REPO_DIR)
+        subprocess.call('git pull --depth=1 origin ' + self.BRANCH ,shell=True,cwd=self.REPO_DIR)
 
 
 
@@ -56,7 +49,7 @@ class GitAdaptor:
 
     def push(self):
         subprocess.call('git checkout ',shell=True)
-        subprocess.call('git push origin hello ',shell=True)
+        subprocess.call('git push origin ' + self.BRANCH,shell=True)
 
     def commit(self):
         subprocess.call('git add -A ',shell=True)
@@ -65,8 +58,6 @@ class GitAdaptor:
 
 
 
-
-# # init(self.REPO_DIR,self.REMOTE_URL)
 
 
 # a=GitAdaptor()
