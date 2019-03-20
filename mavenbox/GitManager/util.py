@@ -28,10 +28,10 @@ class GitAdaptor:
 
 
         include_string='pom.xml'
-
+        
         subprocess.call(['git' ,'init',self.REPO_DIR])
-        subprocess.call('cd temp',shell=True)
-        subprocess.call('cd',shell=True)
+        # subprocess.call(['cd',self.REPO_DIR])
+        # subprocess.call('cd',shell=True)
         self.resetcwd()
         subprocess.call("git remote add origin " + self.REMOTE_URL,shell=True)
         subprocess.call('git config core.sparsecheckout true',shell=True)
